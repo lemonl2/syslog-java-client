@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,6 +23,7 @@ public abstract class AbstractSyslogMessageSender implements SyslogMessageSender
     protected Facility defaultFacility = Facility.USER;
     protected String defaultMessageHostname;
     protected Severity defaultSeverity = Severity.INFORMATIONAL;
+    protected Charset defaultCharset = StandardCharsets.UTF_8;
     // remote syslog server config
     /**
      * Format of messages accepted by the remote syslog server
@@ -88,6 +90,10 @@ public abstract class AbstractSyslogMessageSender implements SyslogMessageSender
         return sendCounter.get();
     }
 
+    public Charset getDefaultCharset() {
+        return defaultCharset;
+    }
+
     /**
      * Human readable view of {@link #getSendDurationInNanos()}
      *
@@ -133,6 +139,11 @@ public abstract class AbstractSyslogMessageSender implements SyslogMessageSender
     public void setDefaultSeverity(Severity defaultSeverity) {
         this.defaultSeverity = defaultSeverity;
     }
+
+    public void setDefaultCharset(Charset defaultCharset) {
+        this.defaultCharset = defaultCharset;
+    }
+
     
     /**
      * Set the hostname or IP of the syslog server to which messages will be

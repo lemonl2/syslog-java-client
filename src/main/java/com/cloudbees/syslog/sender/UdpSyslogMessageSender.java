@@ -80,7 +80,7 @@ public class UdpSyslogMessageSender extends AbstractSyslogMessageSender implemen
 
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            Writer out = new OutputStreamWriter(baos, UTF_8);
+            Writer out = new OutputStreamWriter(baos, defaultCharset);
             message.toSyslogMessage(messageFormat, out);
             out.flush();
 
